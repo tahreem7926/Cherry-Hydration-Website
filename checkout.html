@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍒Cherry Hydration💕 - Checkout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #FFD0D0;
+            padding-top: 100px;
+        }
+
+        nav {
+            background-color: #c9184a;
+            padding: 10px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 5px 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            padding: 5px;
+            width: 250px;
+        }
+
+        .search-bar .bi-search {
+            color: #c9184a;
+            font-size: 20px;
+            margin-left: 10px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 20px;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-icons i {
+            font-size: 24px;
+            color: #ffffff;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-icons i:hover {
+            transform: scale(1.1);
+        }
+
+        .checkout-container {
+            max-width: 900px;
+            margin: 32px auto;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .checkout-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .checkout-title {
+            color: #c9184a;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-section:nth-child(2) { animation-delay: 0.2s; }
+        .form-section:nth-child(3) { animation-delay: 0.4s; }
+
+        .form-section h3 {
+            color: #333;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .payment-method {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .payment-method:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-method.active {
+            border-color: #ff6384;
+            background-color: #fff5f7;
+        }
+
+        .payment-method i {
+            font-size: 2rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .payment-method.active i {
+            color: #ff6384;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: #ff6384;
+            box-shadow: 0 0 0 2px rgba(255, 99, 132, 0.2);
+        }
+
+        .order-summary {
+            border-top: 1px solid #eee;
+            margin-top: 2rem;
+            padding-top: 1rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .summary-row:nth-child(1) { animation-delay: 0.6s; }
+        .summary-row:nth-child(2) { animation-delay: 0.8s; }
+        .summary-row:nth-child(3) { animation-delay: 1s; }
+
+        .summary-row.total {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #c9184a;
+        }
+
+        .btn-pink {
+            background-color: #ff6384;
+            color: white;
+            border: none;
+            outline: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(255, 99, 132, 0.2);
+            color: white !important; /* Ensure the text stays white */
+        }
+
+        .btn-pink:hover {
+            background-color: #ff4d73;
+            color: white !important; /* Ensure the text stays white on hover */
+            outline: none;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(255, 99, 132, 0.3);
+        }
+
+        .place-order-btn {
+            width: 100%;
+            margin-top: 2rem;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards 1.2s;
+        }
+
+        #paypal-form {
+            display: none;
+        }
+
+        #card-form.hidden {
+            display: none;
+        }
+
+        .success-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            display: none;
+            z-index: 1000;
+        }
+
+        .success-message i {
+            font-size: 4rem;
+            color: #4CAF50;
+            margin-bottom: 1rem;
+        }
+
+        .loading {
+            position: relative;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #fff;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        @keyframes spin {
+            to { transform: translateY(-50%) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+            <i class="bi bi-search"></i>
+        </div>
+
+        <div class="logo">
+            <img src="logo1.jpeg" alt="Logo">
+        </div>
+
+        <div class="nav-icons">
+            <a href="home.html"><i class="bi bi-house"></i></a>
+            <a href="bundles.html"><i class="bi bi-box2-heart"></i></a>
+            <a href="cart.html"><i class="bi bi-cart"></i></a>
+            <a href="about-us.html"><i class="bi bi-lightbulb"></i></a>
+            <a href="contact-us.html"><i class="bi bi-envelope"></i></a>
+        </div>
+    </nav>
+
+    <div class="checkout-container">
+        <h2 class="checkout-title">Checkout</h2>
+        
+        <!-- Payment Method Selection -->
+        <div class="payment-methods">
+            <div class="payment-method active" data-method="card">
+                <i class="bi bi-credit-card"></i>
+                <p>Credit Card</p>
+            </div>
+            <div class="payment-method" data-method="paypal">
+                <i class="bi bi-paypal"></i>
+                <p>PayPal</p>
+            </div>
+        </div>
+
+        <!-- Credit Card Form -->
+        <form id="card-form">
+            <!-- Personal Information -->
+            <div class="form-section">
+                <h3>Personal Information</h3>
+                <input type="text" class="form-input" placeholder="Full Name" required>
+                <input type="email" class="form-input" placeholder="Email Address" required>
+            </div>
+
+            <!-- Shipping Information -->
+            <div class="form-section">
+                <h3>Shipping Address</h3>
+                <input type="text" class="form-input" placeholder="Street Address" required>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="text" class="form-input" placeholder="City" required>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-input" placeholder="ZIP Code" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Details -->
+            <div class="form-section">
+                <h3>Card Details</h3>
+                <input type="text" class="form-input" placeholder="Card Number" required>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="text" class="form-input" placeholder="MM/YY" required>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-input" placeholder="CVV" required>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <!-- PayPal Form -->
+        <form id="paypal-form">
+            <div class="form-section">
+                <h3>PayPal Checkout</h3>
+                <p class="text-center mb-4">Click the button below to pay with PayPal</p>
+                <button type="button" class="btn btn-pink btn-block">
+                    <i class="bi bi-paypal"></i> Pay with PayPal
+                </button>
+            </div>
+        </form>
+
+        <!-- Order Summary -->
+        <div class="order-summary">
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="subtotal">$94.97</span>
+            </div>
+            <div class="summary-row">
+                <span>Shipping</span>
+                <span>$5.00</span>
+            </div>
+            <div class="summary-row total">
+                <span>Total</span>
+                <span id="total">$99.97</span>
+            </div>
+        </div>
+
+        <button type="button" class="btn-pink place-order-btn" onclick="placeOrder()">Place Order</button>
+    </div>
+
+    <!-- Success Message -->
+    <div class="success-message">
+        <i class="bi bi-check-circle"></i>
+        <h3>Order Placed Successfully!</h3>
+        <p>Thank you for your purchase.</p>
+        <button class="btn btn-pink mt-3" onclick="redirectToHome()">Continue Shopping</button>
+    </div>
+
+    <script>
+        // Payment method selection
+        const paymentMethods = document.querySelectorAll('.payment-method');
+        const cardForm = document.getElementById('card-form');
+        const paypalForm = document.getElementById('paypal-form');
+
+        paymentMethods.forEach(method => {
+            method.addEventListener('click', () => {
+                paymentMethods.forEach(m => m.classList.remove('active'));
+                method.classList.add('active');
+
+                if (method.dataset.method === 'card') {
+                    cardForm.style.display = 'block';
+                    paypalForm.style.display = 'none';
+                } else {
+                    cardForm.style.display = 'none';
+                    paypalForm.style.display = 'block';
+                }
+            });
+        });
+
+        // Load cart data and update summary
+        function loadCartData() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let subtotal = 0;
+
+            cart.forEach(item => {
+                subtotal += item.price * item.quantity;
+            });
+
+            const shipping = 5.00;
+            const total = subtotal + shipping;
+
+            document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+        }
+
+        // Place order function
+        function placeOrder() {
+            const activeMethod = document.querySelector('.payment-method.active').dataset.method;
+            const btn = document.querySelector('.place-order-btn');
+            
+            let isValid = false;
+            if (activeMethod === 'card') {
+                isValid = document.getElementById('card-form').checkValidity();
+            } else {
+                isValid = true;
+            }
+
+            if (isValid) {
+                // Show loading state
+                btn.classList.add('loading');
+                btn.disabled = true;
+
+                // Simulate processing
+                setTimeout(() => {
+                    // Clear cart
+                    localStorage.removeItem('cart');
+                    
+                    // Show success message
+                    document.querySelector('.success-message').style.display = 'block';
+                    
+                    // Hide loading state
+                    btn.classList.remove('loading');
+                    btn.disabled = false;
+                }, 2000);
+            } else {
+                alert('Please fill in all required fields.');
+            }
+        }
+
+        function redirectToHome() {
+            window.location.href = 'home.html';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCartData();
+
+            // Check if we came from cart page
+            const fromCart = new URLSearchParams(window.location.search).get('from') === 'cart';
+            if (fromCart) {
+                document.querySelector('.checkout-container').style.animation = 'fadeInUp 0.5s forwards';
+            }
+        });
+    </script>
+<footer>
+        <p>&copy; 2023 Cherry Hydration. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

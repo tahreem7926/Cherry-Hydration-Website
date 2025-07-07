@@ -1,0 +1,349 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍒Cherry Hydration💕</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+            background-color: #FFD0D0;
+        }
+
+        /* Navigation bar styling */
+        nav {
+            background-color: #c9184a;
+            padding: 10px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Style for logo */
+        .logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 20px;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Style for search bar */
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 5px 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            padding: 5px;
+            width: 250px;
+        }
+
+        .search-bar .bi-search {
+            color: #c9184a;
+            font-size: 20px;
+            margin-left: 10px;
+        }
+
+        /* Icon styling */
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-icons i {
+            font-size: 24px;
+            color: #ffffff;
+        }
+
+        /* Welcome banner styling */
+        #welcome-banner {
+            background-image: url('welcomebanner.jpeg');
+            background-size: cover;
+            background-position: center;
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            flex-direction: column;
+            margin-top: 80px;
+            padding-bottom: 50px;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+
+        /* Enhanced text for Welcome message */
+        #welcome-banner h1 {
+            font-size: 2.5em;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            margin: 0;
+        }
+
+        /* Styled button */
+        #welcome-banner button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #ff6384;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            outline: none; /* Remove focus outline */
+        }
+
+        #welcome-banner button:hover {
+            background-color: #ff416c;
+            transform: scale(1.05);
+        }
+
+        /* Categories section */
+        #categories {
+            padding: 50px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 150px auto 0;
+            gap: 20px;
+        }
+
+        /* Category item styling */
+        .category {
+            position: relative;
+            width: calc(33.333% - 20px);
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.4s ease, filter 0.4s ease;
+            color: #c9184a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.7em;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            color: inherit;
+            outline: none; /* Remove focus outline */
+        }
+
+        .category:focus, .category:hover {
+            outline: none; /* Ensure no outline on focus */
+            text-decoration: none;
+            color: #800000;
+        }
+
+        /* Overlay for category items */
+        .category::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.2);
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+
+        /* Text styling */
+        .category span {
+            position: relative;
+            z-index: 1;
+            font-weight: bold;
+            color: #800000;
+        }
+
+        /* Hover effect */
+        .category:hover {
+            transform: scale(1.1);
+            z-index: 1;
+            filter: brightness(1.3);
+        }
+
+        /* New scroll indicator styles */
+        .scroll-indicator {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 100px;
+            background: rgba(201, 24, 74, 0.2);
+            border-radius: 5px;
+            z-index: 1000;
+        }
+
+        .scroll-progress {
+            width: 100%;
+            background: #c9184a;
+            height: 0%;
+            border-radius: 5px;
+            transition: height 0.3s ease;
+        }
+
+        /* Button animation */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .bounce {
+            animation: bounce 2s infinite;
+        }
+
+        #welcome-banner button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150%;
+            height: 150%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%) scale(0);
+            border-radius: 50%;
+            transition: transform 0.5s;
+        }
+
+        #welcome-banner button:active::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+            <i class="bi bi-search"></i>
+        </div>
+
+        <div class="logo">
+            <img src="logo1.jpeg" alt="Logo">
+        </div>
+
+        <div class="nav-icons">
+            <a href="home.html"><i class="bi bi-house"></i></a>
+            <a href="bundles.html"><i class="bi bi-box2-heart"></i></a>
+            <a href="cart.html"><i class="bi bi-cart"></i></a>
+            <a href="about-us.html"><i class="bi bi-lightbulb"></i></a>
+            <a href="contact-us.html"><i class="bi bi-envelope"></i></a>
+        </div>
+    </nav>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+        <div class="scroll-progress" id="scrollProgress"></div>
+    </div>
+
+    <!-- Welcome Banner -->
+    <section id="welcome-banner">
+        <h1>Welcome to Cherry Hydration</h1>
+        <button onclick="scrollToCategories()" id="scrollButton">Go to Categories</button>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories">
+        <a href="sunscreen.html"  class="category" style="background-image: url('sunscreen.jpeg');"><span>Sunscreen</span></a>
+        <a href="serums.html" class="category" style="background-image: url('serums.jpeg');"><span>Serums</span></a>
+        <a href="moisturizers.html"  class="category" style="background-image: url('moisturizers.jpeg');"><span>Moisturizers</span></a>
+        <a href="toners.html" class="category" style="background-image: url('toners.jpeg');"><span>Toners</span></a>
+        <a href="eyecreams.html"  class="category" style="background-image: url('eyecreams.jpeg');"><span>Eye Creams</span></a>
+        <a href="exfoliators_and_cleansers.html" class="category" style="background-image: url('exfoliators_and_cleansers.jpeg');"><span>Exfoliators & Cleansers</span></a>
+    </section>
+
+    <script>
+        // Enhanced smooth scrolling
+        function scrollToCategories() {
+            const categoriesSection = document.getElementById('categories');
+            const button = document.getElementById('scrollButton');
+            const startPosition = window.pageYOffset;
+            const targetPosition = categoriesSection.offsetTop - 80;
+            const distance = targetPosition - startPosition;
+            const duration = 1000;
+            let start = null;
+
+            button.style.pointerEvents = 'none';
+            
+            function animation(currentTime) {
+                if (start === null) start = currentTime;
+                const timeElapsed = currentTime - start;
+                const progress = Math.min(timeElapsed / duration, 1);
+                
+                const easeInOutCubic = progress => {
+                    return progress < 0.5
+                        ? 4 * progress * progress * progress
+                        : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+                };
+
+                window.scrollTo(0, startPosition + (distance * easeInOutCubic(progress)));
+
+                if (progress < 1) {
+                    requestAnimationFrame(animation);
+                } else {
+                    button.style.pointerEvents = 'auto';
+                }
+            }
+
+            requestAnimationFrame(animation);
+        }
+
+        // Scroll progress indicator
+        window.addEventListener('scroll', () => {
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollPercent = (scrollTop / (documentHeight - windowHeight)) * 100;
+            
+            document.getElementById('scrollProgress').style.height = `${scrollPercent}%`;
+        });
+
+        // Add bounce animation to button
+        document.addEventListener('DOMContentLoaded', () => {
+            const button = document.getElementById('scrollButton');
+            button.classList.add('bounce');
+        });
+    </script>
+<footer>
+        <p>&copy; 2023 Cherry Hydration. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

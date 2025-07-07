@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍒Cherry Hydration💕</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #FFD0D0;
+            padding-top: 100px;
+        }
+
+        nav {
+            background-color: #c9184a;
+            padding: 10px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 20px;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 5px 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            padding: 5px;
+            width: 250px;
+        }
+
+        .search-bar .bi-search {
+            color: #c9184a;
+            font-size: 20px;
+            margin-left: 10px;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-icons i {
+            font-size: 24px;
+            color: #ffffff;
+            outline: none; /* Remove icon outline */
+        }
+
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background-color: transparent;
+            perspective: 1000px;
+            height: 450px;
+        }
+
+        .product-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .product-card:hover .product-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .product-front, .product-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .product-front {
+            background-color: white;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-back {
+            background-color: white;
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .product-back::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.5);
+            z-index: 1;
+        }
+
+        .product-back-content {
+            position: relative;
+            z-index: 2;
+            padding: 1.5rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-back-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 71%;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-title {
+            color: #c9184a;
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+        }
+
+        .product-price {
+            color: #ff6384;
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin: 0.5rem 0;
+        }
+
+        .product-details {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .ingredients {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 1rem;
+        }
+
+        .page-title {
+            text-align: center;
+            color: #c9184a;
+            margin: 2rem 0;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .add-to-cart-btn {
+            background-color: #ff6384;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: auto;
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            outline: none; /* Remove button focus outline */
+
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #ff4d73;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .add-to-cart-btn i {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+            <i class="bi bi-search"></i>
+        </div>
+
+        <div class="logo">
+            <img src="logo1.jpeg" alt="Logo">
+        </div>
+
+        <div class="nav-icons">
+            <a href="home.html"><i class="bi bi-house"></i></a>
+            <a href="bundles.html"><i class="bi bi-box2-heart"></i></a>
+            <a href="cart.html"><i class="bi bi-cart"></i></a>
+            <a href="about-us.html"><i class="bi bi-lightbulb"></i></a>
+            <a href="contact-us.html"><i class="bi bi-envelope"></i></a>
+        </div>
+    </nav>
+
+    <h1 class="page-title">Eye Creams</h1>
+
+    <div class="products-container">
+        <!-- Product 1 -->
+        <div class="product-card">
+            <div class="product-card-inner">
+                <div class="product-front">
+                    <img src="eyecream1.jpeg" alt="Revitalizing Eye Cream" class="product-image">
+                    <h3 class="product-title">Revitalizing Eye Cream</h3>
+                    <p class="product-price">$29.99</p>
+                </div>
+                <div class="product-back">
+                    <img src="eyecream1.jpeg" alt="Revitalizing Eye Cream" class="product-back-image">
+                    <div class="product-back-content">
+                        <h3 class="product-title">Revitalizing Eye Cream</h3>
+                        <p class="product-details">
+                            Reduces puffiness and dark circles, providing a refreshed look.
+                        </p>
+                        <p class="ingredients">
+                            Key Ingredients: Caffeine, Hyaluronic Acid, Vitamin C.
+                        </p>
+                        <button class="add-to-cart-btn"><a href="cart.html" style="color:white;"><i class="bi bi-cart-plus"></i>Add to Cart</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-card">
+            <div class="product-card-inner">
+                <div class="product-front">
+                    <img src="eyecream2.jpeg" alt="Soothing Eye Gel" class="product-image">
+                    <h3 class="product-title">Soothing Eye Gel</h3>
+                    <p class="product-price">$27.99</p>
+                </div>
+                <div class="product-back">
+                    <img src="eyecream2.jpeg" alt="Soothing Eye Gel" class="product-back-image">
+                    <div class="product-back-content">
+                        <h3 class="product-title">Soothing Eye Gel</h3>
+                        <p class="product-details">
+                            Calms and cools the delicate eye area, reducing signs of fatigue.
+                        </p>
+                        <p class="ingredients">
+                            Key Ingredients: Aloe Vera, Chamomile, Green Tea Extract.
+                        </p>
+                        <button class="add-to-cart-btn"><a href="cart.html" style="color:white;"><i class="bi bi-cart-plus"></i>Add to Cart</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-card">
+            <div class="product-card-inner">
+                <div class="product-front">
+                    <img src="eyecream3.jpeg" alt="Firming Eye Cream" class="product-image">
+                    <h3 class="product-title">Firming Eye Cream</h3>
+                    <p class="product-price">$32.99</p>
+                </div>
+                <div class="product-back">
+                    <img src="eyecream3.jpeg" alt="Firming Eye Cream" class="product-back-image">
+                    <div class="product-back-content">
+                        <h3 class="product-title">Firming Eye Cream</h3>
+                        <p class="product-details">
+                            Improves elasticity and firms the skin around the eyes.
+                        </p>
+                        <p class="ingredients">
+                            Key Ingredients: Peptides, Collagen, Retinol.
+                        </p>
+                        <button class="add-to-cart-btn"><a href="cart.html" style="color:white;"><i class="bi bi-cart-plus"></i>Add to Cart</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="product-card">
+            <div class="product-card-inner">
+                <div class="product-front">
+                    <img src="eyecream4.jpeg" alt="Brightening Eye Cream" class="product-image">
+                    <h3 class="product-title">Brightening Eye Cream</h3>
+                    <p class="product-price">$28.99</p>
+                </div>
+                <div class="product-back">
+                    <img src="eyecream4.jpeg" alt="Brightening Eye Cream" class="product-back-image">
+                    <div class="product-back-content">
+                        <h3 class="product-title">Brightening Eye Cream</h3>
+                        <p class="product-details">
+                            Enhances radiance and reduces dark circles for brighter eyes.
+                        </p>
+                        <p class="ingredients">
+                            Key Ingredients: Vitamin C, Niacinamide, Licorice Extract.
+                        </p>
+                        <button class="add-to-cart-btn"><a href="cart.html" style="color:white;"><i class="bi bi-cart-plus"></i>Add to Cart</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="product-card">
+            <div class="product-card-inner">
+                <div class="product-front">
+                    <img src="eyecream5.jpeg" alt="Hydrating Eye Balm" class="product-image">
+                    <h3 class="product-title">Hydrating Eye Balm</h3>
+                    <p class="product-price">$30.99</p>
+                </div>
+                <div class="product-back">
+                    <img src="eyecream5.jpeg" alt="Hydrating Eye Balm" class="product-back-image">
+                    <div class="product-back-content">
+                        <h3 class="product-title">Hydrating Eye Balm</h3>
+                        <p class="product-details">
+                            Delivers intense hydration to the delicate skin around the eyes.
+                        </p>
+                        <p class="ingredients">
+                            Key Ingredients: Hyaluronic Acid, Squalane, Vitamin E.
+                        </p>
+                        <button class="add-to-cart-btn"><a href="cart.html" style="color:white;"><i class="bi bi-cart-plus"></i>Add to Cart</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="product-card">
+            <div class="product-card-inner">
+                <div class="product-front">
+                    <img src="eyecream6.jpeg" alt="Anti-Aging Eye Cream" class="product-image">
+                    <h3 class="product-title">Anti-Aging Eye Cream</h3>
+                    <p class="product-price">$34.99</p>
+                </div>
+                <div class="product-back">
+                    <img src="eyecream6.jpeg" alt="Anti-Aging Eye Cream" class="product-back-image">
+                    <div class="product-back-content">
+                        <h3 class="product-title">Anti-Aging Eye Cream</h3>
+                        <p class="product-details">
+                            Reduces the appearance of fine lines and wrinkles for youthful eyes.
+                        </p>
+                        <p class="ingredients">
+                            Key Ingredients: Retinol, Peptides, Vitamin A.
+                        </p>
+                        <a href="cart.html" style="color:white;"><button class="add-to-cart-btn"><i class="bi bi-cart-plus"></i>Add to Cart</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        // Add to Cart Logic
+        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const productCard = e.target.closest('.product-card');
+                const productName = productCard.querySelector('.product-title').innerText;
+                const productPrice = parseFloat(productCard.querySelector('.product-price').innerText.replace('$', ''));
+                const productImage = productCard.querySelector('.product-image').src;
+   
+                // Retrieve cart from localStorage or initialize empty
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+   
+                // Check if product already exists
+                const existingProduct = cart.find(item => item.name === productName);
+                if (existingProduct) {
+                    existingProduct.quantity += 1;
+                } else {
+                    cart.push({ name: productName, price: productPrice, image: productImage, quantity: 1 });
+                }
+   
+                // Save updated cart to localStorage
+                localStorage.setItem('cart', JSON.stringify(cart));
+                window.location.href = 'cart.html';
+   
+   
+                alert(`${productName} has been added to the cart.`);
+            });
+        });
+    </script>
+<footer>
+        <p>&copy; 2023 Cherry Hydration. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
