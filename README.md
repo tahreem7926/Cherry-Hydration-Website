@@ -18,7 +18,7 @@ Cherry-Hydration is an educational project built with HTML, CSS, and a touch of 
 - **Contact Page:** Simple contact form for inquiries.
 - **Light JavaScript:** Basic interactivity (e.g., login, cart updates, product description on hover).
 
-## Technologies Used
+## Languages Used
 
 - **HTML**
 - **CSS**
