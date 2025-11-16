@@ -24,6 +24,7 @@ Cherry-Hydration is an educational project built with HTML, CSS, and a touch of 
 - **CSS**
 - **JavaScript** (basic usage)
 - **AI-generated images** (for all product visuals)
+- **BootStrap**
 
 ## Getting Started
 
